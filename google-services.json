@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1047920724345",
+    "firebase_url": "https://gallium-b3e01.firebaseio.com",
+    "project_id": "gallium-b3e01",
+    "storage_bucket": "gallium-b3e01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047920724345:android:26fa64d39b487a6a0007a8",
+        "android_client_info": {
+          "package_name": "com.evangunawan.cookbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047920724345-5p317gqoc2dcf412e492dto0o6n1gmia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWXPEjs_WG8duxJZMKMkyTP6CCW2WMnzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047920724345-5p317gqoc2dcf412e492dto0o6n1gmia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
