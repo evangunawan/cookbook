@@ -1,7 +1,14 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button, Layout, Text, Input, Icon } from '@ui-kitten/components';
 import * as Google from 'expo-google-app-auth';
+import * as SecureStore from 'expo-secure-store';
+import firebase from 'firebase';
+import '@firebase/firestore'
+import Authentication from '../../providers/Authentication';
+
+import { global } from '../../styles/global';
+import LoadingOverlay from '../../components/LoadingOverlay';
 
 const GoogleIcon = (style)=>(<Icon {...style} name='google'/>)
 
@@ -11,9 +18,19 @@ export default class LoginScreen extends React.Component {
     input_email: '',
     input_password: '',
     user: null,
+    show_loading: false,
+  }
+
+  constructor(props){
+    super(props);
+    console.ignoredYellowBox = ['Setting a timer'];
   }
 
   componentDidMount(){
+  }
+
+  showLoading(val){
+    this.setState({show_loading: val});
   }
 
   async googleSignIn(){
@@ -24,7 +41,14 @@ export default class LoginScreen extends React.Component {
       });
   
       if (result.type === 'success') {
-        console.log('GOOGLE: ' + result.accessToken);
+        this.showLoading(true);
+        try{
+          Authentication.authWithGoogle(result.idToken, result.accessToken);
+          // SecureStore.setItemAsync('google_access_token', result.accessToken);
+        }catch(err){
+          alert(err);
+        }
+        this.showLoading(false);
         return result.accessToken;
       } else {
         return { cancelled: true };
@@ -34,12 +58,12 @@ export default class LoginScreen extends React.Component {
     }
   }
 
-
   render(){
-    const { input_email, input_password } = this.state;
+    const { input_email, input_password, show_loading } = this.state;
 
     return(
-      <Layout style={classes.container}>
+      <Layout style={global.container}>
+        { (show_loading) ? <LoadingOverlay/> : null }
         <Text category="h3" style={classes.header}>Welcome</Text>
         <Input 
           label="Email" 
@@ -56,38 +80,30 @@ export default class LoginScreen extends React.Component {
           placeholder="Your secret key"
           secureTextEntry={true}
         />
-        <Button style={classes.loginButton}>SIGN IN</Button>
+        <Button style={global.fullButton}>SIGN IN</Button>
         <Text style={classes.textDivider}>OR</Text>
         <Button 
-          style={[classes.loginButton, classes.googleButton]} 
+          style={[global.fullButton, classes.googleButton]} 
           appearance="outline" 
           icon={GoogleIcon}
           onPress={()=>{this.googleSignIn()}}
         >
             SIGN IN WITH GOOGLE
         </Button>
+        <Text style={classes.textDivider}>Do not have an account?</Text>
+        <Button
+          style={global.fullButton}
+          appearance="ghost"
+          onPress={()=>{this.props.navigation.navigate('Register')}}
+        >Register</Button>
       </Layout>
     )
   }
 }
 
 const classes = StyleSheet.create({
-  centerBox : {
-
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 32,
-  },
   header:{
     margin: 8,
-  },
-  loginButton: {
-    alignSelf: 'stretch',
-    marginVertical: 8,
   },
   textDivider: {
     marginVertical: 4,

@@ -1,15 +1,23 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 export default class LoadingScreen extends React.Component {
 
   componentDidMount(){
-    this.checkAuth();
+    // this.checkAuth();
+    this.props.navigation.navigate('Auth');
   }
 
   async checkAuth(){
-    //TODO: check auth from firebase.
-    this.props.navigation.navigate('Auth');
+    const isAuthed = await SecureStore.getItemAsync('google_access_token') || '';
+    if(isAuthed){
+      console.log('got access token: ' + isAuthed);
+      this.props.navigation.navigate('Dashboard');
+    }else {
+      console.log('did not got auth');
+      this.props.navigation.navigate('Auth');
+    }
   }
 
   render() {

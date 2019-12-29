@@ -3,6 +3,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import LoginScreen from "../screens/Auth/LoginScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import LoadingScreen from "../screens/Auth/LoadingScreen";
+import RegistrationScreen from "../screens/Auth/RegistrationScreen";
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -10,6 +11,9 @@ const AuthStack = createStackNavigator({
     navigationOptions: {
       header: null,
     }
+  },
+  Register: {
+    screen: RegistrationScreen
   }
 });
 const AppStack = createStackNavigator({Dashboard: DashboardScreen});
