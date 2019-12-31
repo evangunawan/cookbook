@@ -3,8 +3,6 @@ import { StyleSheet } from 'react-native';
 import { Button, Layout, Text, Input, Icon } from '@ui-kitten/components';
 import * as Google from 'expo-google-app-auth';
 import * as SecureStore from 'expo-secure-store';
-import firebase from 'firebase';
-import '@firebase/firestore'
 import Authentication from '../../providers/Authentication';
 
 import { global } from '../../styles/global';
@@ -26,7 +24,7 @@ export default class LoginScreen extends React.Component {
     console.ignoredYellowBox = ['Setting a timer'];
   }
 
-  componentDidMount(){
+  componentDidMount(){  
   }
 
   showLoading(val){
@@ -36,24 +34,20 @@ export default class LoginScreen extends React.Component {
   async googleSignIn(){
     try {
       const result = await Google.logInAsync({
-        androidClientId: '1047920724345-8fo7hc4s5gim04vdonqejv6ggfr8mpg6.apps.googleusercontent.com',
+        androidClientId: '1047920724345-843japfvqc5aqj4a61li9ftioqhv1gdv.apps.googleusercontent.com',
+        androidStandaloneAppClientId: '1047920724345-uvc5rbk3ml4ap9miqnpf82i9kk7fjta1.apps.googleusercontent.com',
         scopes: ['profile', 'email'],
       });
   
       if (result.type === 'success') {
         this.showLoading(true);
-        try{
-          Authentication.authWithGoogle(result.idToken, result.accessToken);
-          // SecureStore.setItemAsync('google_access_token', result.accessToken);
-        }catch(err){
-          alert(err);
-        }
-        this.showLoading(false);
-        return result.accessToken;
-      } else {
-        return { cancelled: true };
-      }
+        await Authentication.firebaseGoogleAuth(result);
+      } 
+
+      this.showLoading(false);
+      return result.accessToken;
     } catch (e) {
+      this.showLoading(false);
       return { error: true };
     }
   }

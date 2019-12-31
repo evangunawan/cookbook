@@ -25,7 +25,13 @@
     ],
     "android": {
       "package": "com.evangunawan.cookbook",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleSignIn":{
+          "apiKey":"AIzaSyA9MfiJrkHsblnQ8RJnR4Fa2amcIYkoFwY",
+          "certificateHash": "2E:5F:F7:01:59:72:0F:9E:62:7D:4C:60:DD:41:A4:D1:79:24:F1:D7"
+        }
+      }
     },
     "ios": {
       "supportsTablet": true,

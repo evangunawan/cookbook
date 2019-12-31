@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Text, Button, Layout, Input } from '@ui-kitten/components';
 import { global } from '../../styles/global';
+import Authentication from '../../providers/Authentication';
 
 export default class RegistrationScreen extends React.Component {
 
@@ -20,6 +21,12 @@ export default class RegistrationScreen extends React.Component {
       password: '',
       cpassword: '',
     }
+  }
+
+  registerUser(){
+    const {input} = this.state;
+    Authentication.createNewUser(input.email, input.password);
+    
   }
 
   componentDidMount(){
@@ -75,7 +82,7 @@ export default class RegistrationScreen extends React.Component {
             onChangeText={(text)=>{this.setState({ input: { ...this.state.input, cpassword: text } })}}
             secureTextEntry={true}
           />
-          <Button style={global.fullButton}>CONTINUE</Button>
+          <Button style={global.fullButton} onPress={()=>{this.registerUser()}}>CONTINUE</Button>
         </Layout>
         <Layout style={{height: 100}}/>
       </KeyboardAvoidingView>

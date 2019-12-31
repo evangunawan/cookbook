@@ -24,6 +24,7 @@
     ],
     "rules": {
         "react/prop-types": ["error", { "ignore": ["navigation"] }],
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "react/display-name" : ["off"]
     }
 }
