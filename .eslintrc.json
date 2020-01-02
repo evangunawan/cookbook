@@ -5,7 +5,11 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "prettier",
+        "prettier/flowtype",
+        "prettier/react",
+        "prettier/standard"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -20,7 +24,11 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-native",
+        "flowtype",
+        "prettier",
+        "standard"
     ],
     "rules": {
         "react/prop-types": ["error", { "ignore": ["navigation"] }],

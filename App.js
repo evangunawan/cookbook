@@ -10,23 +10,21 @@ import { mapping, light as lightTheme } from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import LoginScreen from './screens/Auth/LoginScreen';
 
-if(!firebase.apps.length){
+if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
 const RoutedApp = createAppContainer(MainNavigator);
 
 export default class App extends React.Component {
-
-  render(){
-    return(
+  render() {
+    return (
       <React.Fragment>
-        <IconRegistry icons={EvaIconsPack}/>
+        <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider mapping={mapping} theme={lightTheme}>
-          <RoutedApp/>
+          <RoutedApp />
         </ApplicationProvider>
       </React.Fragment>
-    )
+    );
   }
-
 }

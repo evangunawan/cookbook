@@ -6,13 +6,11 @@ const global = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 32,
   },
   fullButton: {
     alignSelf: 'stretch',
     marginVertical: 8,
-  }
-
-})
+  },
+});
 
 export { global };
