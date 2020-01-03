@@ -11,6 +11,8 @@ import ProfileScreen from '../screens/App/ProfileScreen';
 import React from 'react';
 import { Icon } from '@ui-kitten/components';
 
+import { Colors } from '../styles/theme';
+
 const AuthStack = createStackNavigator({
   Login: {
     screen: LoginScreen,
@@ -51,8 +53,8 @@ const AppStack = createBottomTabNavigator(
     tabBarOptions: {
       showIcon: true,
       showLabel: false,
-      activeTintColor: '#3366FF',
-      inactiveTintColor: '#3366FF',
+      activeTintColor: Colors.primary,
+      inactiveTintColor: Colors.primary,
     },
   }
 );

@@ -4,8 +4,19 @@ import { global } from '../../styles/global';
 import { StyleSheet, Alert } from 'react-native';
 import { ProfileBadge } from '../../components/Profile/ProfileBadge';
 import Authentication from '../../providers/Authentication';
+import { getProfileDocument } from '../../api/FirebaseClient';
 
 export default class ProfileScreen extends React.Component {
+  componentDidMount() {
+    this.getProfileData();
+  }
+
+  async getProfileData() {
+    const userId = await Authentication.getActiveUser();
+
+    // const data = await getProfileDocument();
+  }
+
   signOutPrompt() {
     Alert.alert('Sign Out', 'Are you sure?', [
       { text: 'Ok', onPress: () => Authentication.firebaseSignOut() },
@@ -33,7 +44,7 @@ export default class ProfileScreen extends React.Component {
 const classes = StyleSheet.create({
   profileContainer: {
     justifyContent: 'flex-start',
-    marginTop: 64,
+    paddingTop: 64,
   },
   profileItems: {
     width: '100%',

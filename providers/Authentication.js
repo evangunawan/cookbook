@@ -7,6 +7,16 @@ class Authentication {
     console.ignoredYellowBox = ['Setting a timer'];
   }
 
+  async getActiveUser() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user);
+      } else {
+        throw 'user not found';
+      }
+    });
+  }
+
   //Save new profile info to the firebase.
   async saveNewProfile(data) {
     const db = firebase.firestore();
