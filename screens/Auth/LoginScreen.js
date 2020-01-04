@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Layout, Text, Input, Icon } from '@ui-kitten/components';
 import * as Google from 'expo-google-app-auth';
-import Authentication from '../../providers/Authentication';
+import Authentication from '../../api/Authentication';
 
 import { global } from '../../styles/global';
 import LoadingOverlay from '../../components/LoadingOverlay';
@@ -24,6 +24,10 @@ export default class LoginScreen extends React.Component {
 
   componentDidMount() {}
 
+  componentWillUnmount() {
+    this.showLoading(false);
+  }
+
   showLoading(val) {
     this.setState({ show_loading: val });
   }
@@ -40,9 +44,9 @@ export default class LoginScreen extends React.Component {
       });
       if (result.type === 'success') {
         await Authentication.firebaseGoogleAuth(result);
+      } else {
+        this.showLoading(false);
       }
-
-      this.showLoading(false);
       return result.accessToken;
     } catch (e) {
       this.showLoading(false);

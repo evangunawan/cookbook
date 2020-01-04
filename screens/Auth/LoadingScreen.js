@@ -1,24 +1,31 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import * as SecureStore from 'expo-secure-store';
-import { Text } from '@ui-kitten/components';
+import { Layout } from '@ui-kitten/components';
 import firebase from 'firebase';
 import '@firebase/auth';
 import { SplashScreen } from 'expo';
+import MainContext from '../../providers/MainContext';
 
 export default class LoadingScreen extends React.Component {
+  static contextType = MainContext;
+  state = {
+    profile: null,
+  };
+
   componentDidMount() {
     SplashScreen.preventAutoHide();
-    this.checkAuth();
+    this._checkAuth();
   }
 
   componentWillUnmount() {
     SplashScreen.hide();
   }
 
-  async checkAuth() {
-    await firebase.auth().onAuthStateChanged((user) => {
+  _checkAuth() {
+    const context = this.context;
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        context.setProfile(user);
         this.props.navigation.navigate('App');
       } else {
         this.props.navigation.navigate('Auth');
@@ -27,7 +34,7 @@ export default class LoadingScreen extends React.Component {
   }
 
   render() {
-    return <View style={classes.center}></View>;
+    return <Layout />;
   }
 }
 

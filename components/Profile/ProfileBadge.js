@@ -3,18 +3,17 @@ import { Layout, Avatar, Text } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 
 export const ProfileBadge = (props) => {
+  const profile = props.profile;
   return (
     <Layout style={classes.wrapper}>
       <Avatar
         style={classes.avatar}
         shape='round'
-        width={96}
-        height={96}
-        source={{
-          uri:
-            'https://akveo.github.io/react-native-ui-kitten/docs/assets/playground-build/static/media/brand-logo.a78e4b51.png',
-        }}
+        height={82}
+        width={82}
+        source={{ uri: profile.photoURL }}
       />
+      <Text category='h4'>{profile.displayName}</Text>
       <Layout style={classes.profileBadge}>
         <Layout style={classes.badgeItem}>
           <Text category='h6'>Followers</Text>
@@ -44,5 +43,9 @@ const classes = StyleSheet.create({
   badgeItem: {
     marginHorizontal: 16,
     marginVertical: 32,
+  },
+  avatar: {
+    borderRadius: 128,
+    marginBottom: 24,
   },
 });

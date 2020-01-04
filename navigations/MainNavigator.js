@@ -12,6 +12,7 @@ import React from 'react';
 import { Icon } from '@ui-kitten/components';
 
 import { Colors } from '../styles/theme';
+import DashboardScreen from '../screens/DashboardScreen';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -24,7 +25,8 @@ const AuthStack = createStackNavigator({
     screen: RegistrationScreen,
   },
 });
-const AppStack = createBottomTabNavigator(
+
+const TabStack = createBottomTabNavigator(
   {
     Home: {
       screen: HomeScreen,
@@ -55,6 +57,31 @@ const AppStack = createBottomTabNavigator(
       showLabel: false,
       activeTintColor: Colors.primary,
       inactiveTintColor: Colors.primary,
+    },
+  }
+);
+
+const AppStack = createStackNavigator(
+  {
+    MainTabs: {
+      screen: TabStack,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    TestPage: {
+      screen: DashboardScreen,
+      navigationOptions: {
+        title: 'test',
+      },
+    },
+  },
+  {
+    defaultNavigationOptions: {
+      //Temporary fix.
+      headerStyle: {
+        marginTop: -24,
+      },
     },
   }
 );

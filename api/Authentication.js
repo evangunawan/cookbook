@@ -8,13 +8,15 @@ class Authentication {
   }
 
   async getActiveUser() {
-    firebase.auth().onAuthStateChanged((user) => {
+    let result = null;
+    await firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(user);
+        result = user;
       } else {
         throw 'user not found';
       }
     });
+    return result;
   }
 
   //Save new profile info to the firebase.

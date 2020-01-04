@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Text, Button, Layout, Input } from '@ui-kitten/components';
 import { global } from '../../styles/global';
-import Authentication from '../../providers/Authentication';
+import Authentication from '../../api/Authentication';
 
 export default class RegistrationScreen extends React.Component {
   static navigationOptions = {
@@ -120,7 +120,7 @@ const classes = StyleSheet.create({
   keyAvoidView: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   header: {
     margin: 8,

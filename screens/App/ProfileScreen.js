@@ -3,18 +3,23 @@ import { Layout, ListItem } from '@ui-kitten/components';
 import { global } from '../../styles/global';
 import { StyleSheet, Alert } from 'react-native';
 import { ProfileBadge } from '../../components/Profile/ProfileBadge';
-import Authentication from '../../providers/Authentication';
+import Authentication from '../../api/Authentication';
 import { getProfileDocument } from '../../api/FirebaseClient';
+import MainContext from '../../providers/MainContext';
 
 export default class ProfileScreen extends React.Component {
-  componentDidMount() {
-    this.getProfileData();
+  static contextType = MainContext;
+
+  constructor(props) {
+    super(props);
+    state = {
+      profile: {},
+    };
   }
 
-  async getProfileData() {
-    const userId = await Authentication.getActiveUser();
-
-    // const data = await getProfileDocument();
+  componentDidMount() {
+    const context = this.context;
+    this.setState({ profile: context.profile });
   }
 
   signOutPrompt() {
@@ -27,8 +32,13 @@ export default class ProfileScreen extends React.Component {
   render() {
     return (
       <Layout style={[global.container, classes.profileContainer]}>
-        <ProfileBadge />
+        <ProfileBadge profile={this.context.profile} />
         <Layout style={classes.profileItems}>
+          <ListItem
+            title='Open Test'
+            style={classes.listItem}
+            onPress={() => this.props.navigation.navigate('TestPage')}
+          />
           <ListItem
             title='LogOut'
             style={classes.listItem}
