@@ -13,6 +13,7 @@ import { Icon } from '@ui-kitten/components';
 
 import { Colors } from '../styles/theme';
 import DashboardScreen from '../screens/DashboardScreen';
+import EditProfileScreen from '../screens/App/EditProfileScreen';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -33,9 +34,7 @@ const TabStack = createBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
           let iconName = `home${focused ? '' : '-outline'}`;
-          return (
-            <Icon name={iconName} width={24} height={24} fill={tintColor} />
-          );
+          return <Icon name={iconName} width={24} height={24} fill={tintColor} />;
         },
       },
     },
@@ -44,9 +43,7 @@ const TabStack = createBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
           let iconName = `person${focused ? '' : '-outline'}`;
-          return (
-            <Icon name={iconName} width={24} height={24} fill={tintColor} />
-          );
+          return <Icon name={iconName} width={24} height={24} fill={tintColor} />;
         },
       },
     },
@@ -73,6 +70,12 @@ const AppStack = createStackNavigator(
       screen: DashboardScreen,
       navigationOptions: {
         title: 'test',
+      },
+    },
+    EditProfile: {
+      screen: EditProfileScreen,
+      navigationOptions: {
+        title: 'Edit Profile',
       },
     },
   },

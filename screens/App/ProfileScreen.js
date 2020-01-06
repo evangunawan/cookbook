@@ -20,6 +20,7 @@ export default class ProfileScreen extends React.Component {
   componentDidMount() {
     const context = this.context;
     this.setState({ profile: context.profile });
+    // console.log(context.profile);
   }
 
   signOutPrompt() {
@@ -38,6 +39,11 @@ export default class ProfileScreen extends React.Component {
             title='Open Test'
             style={classes.listItem}
             onPress={() => this.props.navigation.navigate('TestPage')}
+          />
+          <ListItem
+            title='Edit Profile'
+            style={classes.listItem}
+            onPress={() => this.props.navigation.navigate('EditProfile')}
           />
           <ListItem
             title='LogOut'

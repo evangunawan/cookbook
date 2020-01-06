@@ -30,13 +30,7 @@ export default class RegistrationScreen extends React.Component {
   componentDidMount() {}
 
   render() {
-    const {
-      email,
-      firstname,
-      lastname,
-      password,
-      cpassword,
-    } = this.state.input;
+    const { email, firstname, lastname, password, cpassword } = this.state.input;
 
     return (
       <KeyboardAvoidingView style={classes.keyAvoidView} behavior='padding'>

@@ -1,4 +1,5 @@
 {
+  "printWidth": 100,
   "parser": "babel",
   "trailingComma": "es5",
   "tabWidth": 2,

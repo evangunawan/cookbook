@@ -13,7 +13,7 @@ export const ProfileBadge = (props) => {
         width={82}
         source={{ uri: profile.photoURL }}
       />
-      <Text category='h4'>{profile.displayName}</Text>
+      <Text category='h4'>{`${profile.first_name} ${profile.last_name}`}</Text>
       <Layout style={classes.profileBadge}>
         <Layout style={classes.badgeItem}>
           <Text category='h6'>Followers</Text>

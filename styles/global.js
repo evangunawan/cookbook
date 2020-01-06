@@ -11,6 +11,10 @@ const global = StyleSheet.create({
     alignSelf: 'stretch',
     marginVertical: 8,
   },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
 });
 
 export { global };

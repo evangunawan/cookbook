@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import '@firebase/auth';
 import { SplashScreen } from 'expo';
 import MainContext from '../../providers/MainContext';
+import { getProfileDocument } from '../../api/FirebaseClient';
 
 export default class LoadingScreen extends React.Component {
   static contextType = MainContext;
@@ -23,9 +24,10 @@ export default class LoadingScreen extends React.Component {
 
   _checkAuth() {
     const context = this.context;
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        context.setProfile(user);
+        const dbProfile = await getProfileDocument(user.uid);
+        context.setProfile(dbProfile);
         this.props.navigation.navigate('App');
       } else {
         this.props.navigation.navigate('Auth');
