@@ -58,7 +58,7 @@ export default class LoginScreen extends React.Component {
     const { input_email, input_password, show_loading } = this.state;
 
     return (
-      <Layout style={[global.container, classes.authWrapper]}>
+      <Layout style={[global.containerCenter, classes.authWrapper]}>
         {show_loading ? <LoadingOverlay /> : null}
         <Text category='h3' style={classes.header}>
           Welcome

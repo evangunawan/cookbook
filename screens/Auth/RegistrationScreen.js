@@ -34,7 +34,7 @@ export default class RegistrationScreen extends React.Component {
 
     return (
       <KeyboardAvoidingView style={classes.keyAvoidView} behavior='padding'>
-        <Layout style={[global.container, classes.authWrapper]}>
+        <Layout style={[global.containerCenter, classes.authWrapper]}>
           <Text category='h3' style={classes.header}>
             Register
           </Text>

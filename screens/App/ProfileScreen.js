@@ -32,7 +32,7 @@ export default class ProfileScreen extends React.Component {
 
   render() {
     return (
-      <Layout style={[global.container, classes.profileContainer]}>
+      <Layout style={[global.containerCenter, classes.profileContainer]}>
         <ProfileBadge profile={this.context.profile} />
         <Layout style={classes.profileItems}>
           <ListItem

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createSwitchNavigator } from 'react-navigation';
+import { createSwitchNavigator, NavigationActions } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import LoginScreen from '../screens/Auth/LoginScreen';
 import LoadingScreen from '../screens/Auth/LoadingScreen';
@@ -14,6 +14,7 @@ import { Icon } from '@ui-kitten/components';
 import { Colors } from '../styles/theme';
 import DashboardScreen from '../screens/DashboardScreen';
 import EditProfileScreen from '../screens/App/EditProfileScreen';
+import CreateRecipeScreen from '../screens/App/Recipe/CreateRecipeScreen';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -36,6 +37,15 @@ const TabStack = createBottomTabNavigator(
           let iconName = `home${focused ? '' : '-outline'}`;
           return <Icon name={iconName} width={24} height={24} fill={tintColor} />;
         },
+      },
+    },
+    CreateRecipe: {
+      screen: CreateRecipeScreen,
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => (
+          <Icon name='plus' width={24} height={24} fill={tintColor} />
+        ),
+        tabBarVisible: false,
       },
     },
     Profile: {
@@ -69,7 +79,7 @@ const AppStack = createStackNavigator(
     TestPage: {
       screen: DashboardScreen,
       navigationOptions: {
-        title: 'test',
+        title: 'Test Page',
       },
     },
     EditProfile: {
