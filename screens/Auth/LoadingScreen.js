@@ -26,6 +26,7 @@ export default class LoadingScreen extends React.Component {
     const context = this.context;
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
+        console.log('DEBUG: onAuthStateChanged called');
         const dbProfile = await getProfileDocument(user.uid);
         context.setProfile(dbProfile);
         this.props.navigation.navigate('App');

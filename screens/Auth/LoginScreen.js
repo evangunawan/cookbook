@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { Button, Layout, Text, Input, Icon } from '@ui-kitten/components';
 import * as Google from 'expo-google-app-auth';
 import Authentication from '../../api/Authentication';
@@ -30,6 +30,18 @@ export default class LoginScreen extends React.Component {
 
   showLoading(val) {
     this.setState({ show_loading: val });
+  }
+
+  async emailSignIn() {
+    const { input_email, input_password } = this.state;
+    this.showLoading(true);
+    try {
+      await Authentication.firebaseEmailAuth(input_email, input_password);
+    } catch (err) {
+      console.log(err);
+      this.showLoading(false);
+    }
+    this.showLoading(false);
   }
 
   async googleSignIn() {
@@ -82,7 +94,13 @@ export default class LoginScreen extends React.Component {
           placeholder='Your secret key'
           secureTextEntry={true}
         />
-        <Button style={global.fullButton}>SIGN IN</Button>
+        <Button
+          style={global.fullButton}
+          onPress={() => {
+            this.emailSignIn();
+          }}>
+          SIGN IN
+        </Button>
         <Text style={classes.textDivider}>OR</Text>
         <Button
           style={[global.fullButton, classes.googleButton]}

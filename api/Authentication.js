@@ -34,15 +34,18 @@ class Authentication {
       });
   }
 
-  async createNewUser(email, password) {
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
-    } catch (err) {
-      console.log(err);
-    }
+  async _saveNewEmailProfile(data, profile) {
+    const db = firebase.firestore();
+    db.collection('profiles')
+      .doc(data.user.uid)
+      .set({
+        email: data.user.email,
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+        last_loggedin: Date.now(),
+        created_at: Date.now(),
+      });
   }
-
-  authWithEmail() {}
 
   _isUserEqual(googleUser, firebaseUser) {
     if (firebaseUser) {
@@ -58,6 +61,14 @@ class Authentication {
       }
     }
     return false;
+  }
+
+  async firebaseEmailAuth(email, password) {
+    try {
+      const result = firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch (err) {
+      throw err;
+    }
   }
 
   async firebaseGoogleAuth(googleUser) {
@@ -80,6 +91,17 @@ class Authentication {
         }
       }
     });
+  }
+
+  async createNewUser(email, password, profile) {
+    try {
+      const authResult = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      // this._saveNewEmailProfile(profile);
+      // console.log(authResult);
+      this._saveNewEmailProfile(authResult, profile);
+    } catch (err) {
+      throw err;
+    }
   }
 
   firebaseSignOut() {

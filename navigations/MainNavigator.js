@@ -65,6 +65,7 @@ const TabStack = createBottomTabNavigator(
       activeTintColor: Colors.primary,
       inactiveTintColor: Colors.primary,
     },
+    resetOnBlur: true,
   }
 );
 
