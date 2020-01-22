@@ -76,7 +76,7 @@ const CreateRecipeScreen = (props) => {
           visible={ingredientModal}
           onClose={() => setIngridientModal(false)}
           onAddIngredient={(result) => {
-            console.log(result);
+            // console.log(result);
             setIngredientList([...ingredientList, result]);
           }}
         />

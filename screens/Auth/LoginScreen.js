@@ -15,6 +15,7 @@ export default class LoginScreen extends React.Component {
     input_password: '',
     user: null,
     show_loading: false,
+    errorText: '',
   };
 
   constructor(props) {
@@ -25,27 +26,30 @@ export default class LoginScreen extends React.Component {
   componentDidMount() {}
 
   componentWillUnmount() {
-    this.showLoading(false);
+    this._showLoading(false);
   }
 
-  showLoading(val) {
+  _showLoading(val) {
     this.setState({ show_loading: val });
+  }
+
+  _setErrorMessage(msg) {
+    this.setState({ errorText: msg });
   }
 
   async emailSignIn() {
     const { input_email, input_password } = this.state;
-    this.showLoading(true);
+    this._showLoading(true);
     try {
       await Authentication.firebaseEmailAuth(input_email, input_password);
     } catch (err) {
-      console.log(err);
-      this.showLoading(false);
+      this._setErrorMessage(err.message);
+      this._showLoading(false);
     }
-    this.showLoading(false);
   }
 
   async googleSignIn() {
-    this.showLoading(true);
+    this._showLoading(true);
     try {
       const result = await Google.logInAsync({
         androidClientId:
@@ -57,11 +61,11 @@ export default class LoginScreen extends React.Component {
       if (result.type === 'success') {
         await Authentication.firebaseGoogleAuth(result);
       } else {
-        this.showLoading(false);
+        this._showLoading(false);
       }
       return result.accessToken;
     } catch (e) {
-      this.showLoading(false);
+      this._showLoading(false);
       return { error: true };
     }
   }
@@ -94,6 +98,7 @@ export default class LoginScreen extends React.Component {
           placeholder='Your secret key'
           secureTextEntry={true}
         />
+        <Text style={classes.errorText}>{this.state.errorText}</Text>
         <Button
           style={global.fullButton}
           onPress={() => {
@@ -135,6 +140,9 @@ const classes = StyleSheet.create({
   textDivider: {
     marginVertical: 4,
     color: '#aaa',
+  },
+  errorText: {
+    color: 'red',
   },
   googleButton: {},
 });

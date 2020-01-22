@@ -65,7 +65,7 @@ class Authentication {
 
   async firebaseEmailAuth(email, password) {
     try {
-      const result = firebase.auth().signInWithEmailAndPassword(email, password);
+      const result = await firebase.auth().signInWithEmailAndPassword(email, password);
     } catch (err) {
       throw err;
     }
